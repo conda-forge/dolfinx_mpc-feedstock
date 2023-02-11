@@ -1,5 +1,5 @@
 {% set name = "dolfinx_mpc" %}
-{% set version = "0.6.1" %}
+{% set version = "0.6.1.post0" %}
 {% set major_minor = version.rsplit(".", 1)[0] %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ec001621be3b4b7122d8b8e889b60c11a246827f88703778b428beb644c08fbb
+  sha256: 691dc8e446e14ca37b4c6034f66f18d8ecf7e1b210bf3aa2f2d085e7d83b5a16
 
 build:
   number: 0
