@@ -42,12 +42,12 @@ outputs:
         - fenics-ufcx {{ major_minor }}
         - {{ mpi }}
         - petsc
+        - petsc * {{ scalar }}_*
       run:
         - fenics-libdolfinx
         - fenics-libbasix
         - {{ mpi }}
         - petsc
-        - petsc * {{ scalar }}_*
     test:
       commands:
         - test -f $PREFIX/lib/libdolfinx_mpc${SHLIB_EXT}
