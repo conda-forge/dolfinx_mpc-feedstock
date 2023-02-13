@@ -15,7 +15,7 @@ cxx_compiler_version:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 mpi:
-- mpich
+- openmpi
 mpich:
 - '4'
 openmpi:
@@ -30,6 +30,8 @@ python:
 - 3.10.* *_cpython
 - 3.8.* *_cpython
 - 3.9.* *_cpython
+scalar:
+- complex
 target_platform:
 - osx-64
 zip_keys:
