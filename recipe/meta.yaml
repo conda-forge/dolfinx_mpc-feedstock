@@ -11,8 +11,16 @@ source:
   sha256: ec001621be3b4b7122d8b8e889b60c11a246827f88703778b428beb644c08fbb
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
+
+  # openmpi oversubscribe env
+  script_env:
+    - OMPI_ALLOW_RUN_AS_ROOT=1
+    - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+    - OMPI_MCA_rmaps_base_oversubscribe=1
+    - OMPI_MCA_plm=isolated
+    - OMPI_MCA_btl_vader_single_copy_mechanism=none
 
 outputs:
   - name: libdolfinx_mpc
@@ -27,6 +35,7 @@ outputs:
         - cmake
         - make
         - pkg-config
+        - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
       host:
         - fenics-libdolfinx {{ major_minor }}
         - fenics-libbasix {{ major_minor }}
@@ -38,6 +47,7 @@ outputs:
         - fenics-libbasix
         - {{ mpi }}
         - petsc
+        - petsc * {{ scalar }}_*
     test:
       commands:
         - test -f $PREFIX/lib/libdolfinx_mpc${SHLIB_EXT}
@@ -52,6 +62,8 @@ outputs:
         - cmake
         - make
         - pkg-config
+        - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-libbasix {{ major_minor }}
@@ -60,6 +72,7 @@ outputs:
         - fenics-dolfinx {{ major_minor }}
         - {{ mpi }}
         - petsc
+        - petsc * {{ scalar }}_*
         - pip
         - python
         - pybind11
