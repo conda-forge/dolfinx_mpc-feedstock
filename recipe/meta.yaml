@@ -28,6 +28,8 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage("libdolfinx_mpc", max_pin="x.x") }}
+      force_use_keys:
+        - python
 
     requirements:
       build:
