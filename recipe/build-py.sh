@@ -9,7 +9,11 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
   # we need:
   # dolfinx.wrappers.get_include_path()
   # petsc4py.get_include()
-  export CXXFLAGS="${CXXFLAGS} -I${SP_DIR}/dolfinx/wrappers -I${SP_DIR}/petsc4py/include"
+  export CXXFLAGS="-I${SP_DIR}/dolfinx/wrappers -I${SP_DIR}/petsc4py/include ${CXXFLAGS}"
+  # make sure these exist
+  test -d ${SP_DIR}/dolfinx/wrappers
+  test -f ${SP_DIR}/dolfinx/wrappers/array.h
+  test -d ${SP_DIR}/petsc4py/include
 fi
 
 export CMAKE_ARGS="${CMAKE_ARGS} -DPython3_FIND_STRATEGY=LOCATION"
