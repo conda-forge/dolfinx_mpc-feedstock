@@ -4,4 +4,6 @@ set -eux
 export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 
 export CMAKE_ARGS="${CMAKE_ARGS} -DPython3_FIND_STRATEGY=LOCATION"
+# show compilation commands for easier debugging
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_VERBOSE_MAKEFILE=ON"
 ${PYTHON} -m pip install --no-build-isolation --no-deps -vv ./python
