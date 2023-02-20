@@ -66,6 +66,7 @@ outputs:
         - pkg-config
         - {{ mpi }}  # [mpi == 'openmpi' and build_platform != target_platform]
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python  # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-libbasix {{ major_minor }}
