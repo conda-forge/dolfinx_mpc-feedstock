@@ -1,5 +1,5 @@
 {% set name = "dolfinx_mpc" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 {% set major_minor = version.rsplit(".", 1)[0] %}
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ec001621be3b4b7122d8b8e889b60c11a246827f88703778b428beb644c08fbb
+  sha256: e71ad0b2e03096dd349a74a9397ded8d17571b2acadd1f6fd3b2c62d96bf915f
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win or py==311]
 
   # openmpi oversubscribe env
