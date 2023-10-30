@@ -7,8 +7,10 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e71ad0b2e03096dd349a74a9397ded8d17571b2acadd1f6fd3b2c62d96bf915f
+  url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.post0.tar.gz
+  sha256: edf0e2ec0228d413dea534a023cc97e186075479f8da31143478a7730f35ebc2
+  patches:
+    - 87.patch
 
 build:
   number: 0
