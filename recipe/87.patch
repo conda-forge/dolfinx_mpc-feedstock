@@ -1,0 +1,640 @@
+From 3b76b546d813514dc5ee7efdea4c66c437ac6e0b Mon Sep 17 00:00:00 2001
+From: Min RK <benjaminrk@gmail.com>
+Date: Mon, 30 Oct 2023 11:09:23 +0100
+Subject: [PATCH] systematically add from future import annotations
+
+for Python 3.8 annotation compatibility
+---
+ python/benchmarks/bench_contact_3D.py         | 1 +
+ python/benchmarks/bench_elasticity.py         | 1 +
+ python/benchmarks/bench_elasticity_edge.py    | 1 +
+ python/benchmarks/bench_periodic.py           | 2 +-
+ python/benchmarks/post_proc.py                | 2 ++
+ python/benchmarks/ref_elasticity.py           | 1 +
+ python/benchmarks/ref_periodic.py             | 3 +--
+ python/benchmarks/visualize_iterations.py     | 2 ++
+ python/demos/create_and_export_mesh.py        | 2 ++
+ python/demos/demo_contact_2D.py               | 2 +-
+ python/demos/demo_contact_3D.py               | 2 +-
+ python/demos/demo_elasticity.py               | 2 ++
+ python/demos/demo_elasticity_disconnect.py    | 2 +-
+ python/demos/demo_elasticity_disconnect_2D.py | 1 +
+ python/demos/demo_periodic3d_topological.py   | 2 +-
+ python/demos/demo_periodic_geometrical.py     | 3 ++-
+ python/demos/demo_periodic_gep.py             | 1 +
+ python/demos/demo_stokes.py                   | 2 ++
+ python/demos/demo_stokes_nest.py              | 1 +
+ python/dolfinx_mpc/__init__.py                | 3 ++-
+ python/dolfinx_mpc/assemble_matrix.py         | 1 +
+ python/dolfinx_mpc/assemble_vector.py         | 1 +
+ python/dolfinx_mpc/dictcondition.py           | 1 +
+ python/dolfinx_mpc/multipointconstraint.py    | 1 +
+ python/dolfinx_mpc/numba/__init__.py          | 4 ++--
+ python/dolfinx_mpc/numba/assemble_matrix.py   | 1 +
+ python/dolfinx_mpc/numba/assemble_vector.py   | 1 +
+ python/dolfinx_mpc/numba/helpers.py           | 1 +
+ python/dolfinx_mpc/numba/numba_setup.py       | 1 +
+ python/dolfinx_mpc/problem.py                 | 1 +
+ python/dolfinx_mpc/utils/__init__.py          | 1 +
+ python/dolfinx_mpc/utils/mpc_utils.py         | 1 +
+ python/dolfinx_mpc/utils/test.py              | 1 +
+ python/tests/mwe123.py                        | 1 +
+ python/tests/nitsche_ufl.py                   | 1 +
+ python/tests/test_cube_contact.py             | 1 +
+ python/tests/test_integration_domains.py      | 2 +-
+ python/tests/test_lifting.py                  | 1 +
+ python/tests/test_linear_problem.py           | 2 +-
+ python/tests/test_matrix_assembly.py          | 1 +
+ python/tests/test_mpc_pipeline.py             | 2 +-
+ python/tests/test_nonlinear_assembly.py       | 2 ++
+ python/tests/test_rectangular_assembly.py     | 1 +
+ python/tests/test_surface_integral.py         | 2 +-
+ python/tests/test_vector_assembly.py          | 1 +
+ python/tests/test_vector_poisson.py           | 1 +
+ 46 files changed, 55 insertions(+), 15 deletions(-)
+
+diff --git a/python/benchmarks/bench_contact_3D.py b/python/benchmarks/bench_contact_3D.py
+index 3a0c5e57..0e71b759 100644
+--- a/python/benchmarks/bench_contact_3D.py
++++ b/python/benchmarks/bench_contact_3D.py
+@@ -6,6 +6,7 @@
+ #
+ # Multi point constraint problem for linear elasticity with slip conditions
+ # between two cubes.
++from __future__ import annotations
+ 
+ import warnings
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/benchmarks/bench_elasticity.py b/python/benchmarks/bench_elasticity.py
+index b15ff399..65603246 100644
+--- a/python/benchmarks/bench_elasticity.py
++++ b/python/benchmarks/bench_elasticity.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import resource
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/benchmarks/bench_elasticity_edge.py b/python/benchmarks/bench_elasticity_edge.py
+index df79e88a..dbe663c4 100644
+--- a/python/benchmarks/bench_elasticity_edge.py
++++ b/python/benchmarks/bench_elasticity_edge.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import resource
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/benchmarks/bench_periodic.py b/python/benchmarks/bench_periodic.py
+index e26dc1d3..a7b446b0 100644
+--- a/python/benchmarks/bench_periodic.py
++++ b/python/benchmarks/bench_periodic.py
+@@ -10,7 +10,7 @@
+ # This file is part of DOLFINX_MPC.
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+ from pathlib import Path
+diff --git a/python/benchmarks/post_proc.py b/python/benchmarks/post_proc.py
+index cc2d3162..8fe9ba60 100644
+--- a/python/benchmarks/post_proc.py
++++ b/python/benchmarks/post_proc.py
+@@ -1,3 +1,5 @@
++from __future__ import annotations
++
+ import numpy as np
+ import matplotlib.pyplot as plt
+ 
+diff --git a/python/benchmarks/ref_elasticity.py b/python/benchmarks/ref_elasticity.py
+index f0c3a6bd..70be41ee 100644
+--- a/python/benchmarks/ref_elasticity.py
++++ b/python/benchmarks/ref_elasticity.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import resource
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/benchmarks/ref_periodic.py b/python/benchmarks/ref_periodic.py
+index bf689248..73317e43 100644
+--- a/python/benchmarks/ref_periodic.py
++++ b/python/benchmarks/ref_periodic.py
+@@ -1,4 +1,3 @@
+-
+ # This demo program solves Poisson's equation
+ #
+ #     - div grad u(x, y) = f(x, y)
+@@ -15,7 +14,7 @@
+ # This file is part of DOLFINX_MPC.
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+ from pathlib import Path
+diff --git a/python/benchmarks/visualize_iterations.py b/python/benchmarks/visualize_iterations.py
+index 5cd0583f..a771eceb 100644
+--- a/python/benchmarks/visualize_iterations.py
++++ b/python/benchmarks/visualize_iterations.py
+@@ -1,3 +1,5 @@
++from __future__ import annotations
++
+ import matplotlib.pyplot as plt
+ from matplotlib.ticker import MaxNLocator, LogLocator, NullFormatter
+ import matplotlib.transforms as mtransforms
+diff --git a/python/demos/create_and_export_mesh.py b/python/demos/create_and_export_mesh.py
+index b62cfb5a..ce97c817 100644
+--- a/python/demos/create_and_export_mesh.py
++++ b/python/demos/create_and_export_mesh.py
+@@ -1,3 +1,5 @@
++from __future__ import annotations
++
+ from pathlib import Path
+ from typing import Dict, List, Sequence, Tuple, Union
+ 
+diff --git a/python/demos/demo_contact_2D.py b/python/demos/demo_contact_2D.py
+index d1cfa4da..3b770e4e 100644
+--- a/python/demos/demo_contact_2D.py
++++ b/python/demos/demo_contact_2D.py
+@@ -11,7 +11,7 @@
+ # A slip condition is implemented at the interface of the cube.
+ # Additional constraints to avoid tangential movement is
+ # added to the to left corner of the top cube.
+-
++from __future__ import annotations
+ 
+ import warnings
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/demos/demo_contact_3D.py b/python/demos/demo_contact_3D.py
+index 9aa1bc58..8eb6d991 100644
+--- a/python/demos/demo_contact_3D.py
++++ b/python/demos/demo_contact_3D.py
+@@ -6,7 +6,7 @@
+ #
+ # Multi point constraint problem for linear elasticity with slip conditions
+ # between two cubes.
+-
++from __future__ import annotations
+ 
+ import warnings
+ from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
+diff --git a/python/demos/demo_elasticity.py b/python/demos/demo_elasticity.py
+index c64f0454..9e38cd2e 100644
+--- a/python/demos/demo_elasticity.py
++++ b/python/demos/demo_elasticity.py
+@@ -3,6 +3,8 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
++
+ from pathlib import Path
+ 
+ import dolfinx.fem as fem
+diff --git a/python/demos/demo_elasticity_disconnect.py b/python/demos/demo_elasticity_disconnect.py
+index ffc5f229..8510ff1a 100644
+--- a/python/demos/demo_elasticity_disconnect.py
++++ b/python/demos/demo_elasticity_disconnect.py
+@@ -5,7 +5,7 @@
+ # SPDX-License-Identifier:    MIT
+ #
+ # Create constraint between two bodies that are not in contact
+-
++from __future__ import annotations
+ 
+ from pathlib import Path
+ 
+diff --git a/python/demos/demo_elasticity_disconnect_2D.py b/python/demos/demo_elasticity_disconnect_2D.py
+index b6b35846..d205828f 100644
+--- a/python/demos/demo_elasticity_disconnect_2D.py
++++ b/python/demos/demo_elasticity_disconnect_2D.py
+@@ -5,6 +5,7 @@
+ # SPDX-License-Identifier:    MIT
+ #
+ # Create constraint between two bodies that are not in contact
++from __future__ import annotations
+ 
+ from pathlib import Path
+ 
+diff --git a/python/demos/demo_periodic3d_topological.py b/python/demos/demo_periodic3d_topological.py
+index 80e64dfc..1c9f21f2 100644
+--- a/python/demos/demo_periodic3d_topological.py
++++ b/python/demos/demo_periodic3d_topological.py
+@@ -1,4 +1,3 @@
+-
+ # This demo program solves Poisson's equation
+ #
+ #     - div grad u(x, y) = f(x, y)
+@@ -15,6 +14,7 @@
+ # This file is part of DOLFINX_MPCX.
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from pathlib import Path
+ from typing import Dict, Union
+diff --git a/python/demos/demo_periodic_geometrical.py b/python/demos/demo_periodic_geometrical.py
+index d9cb3d64..d283c109 100644
+--- a/python/demos/demo_periodic_geometrical.py
++++ b/python/demos/demo_periodic_geometrical.py
+@@ -10,10 +10,11 @@
+ # This file is part of DOLFINX_MPCX.
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ from pathlib import Path
+ from typing import Union
++
+ import dolfinx.fem as fem
+ import numpy as np
+ import scipy.sparse.linalg
+diff --git a/python/demos/demo_periodic_gep.py b/python/demos/demo_periodic_gep.py
+index a8562900..c3f0ff02 100755
+--- a/python/demos/demo_periodic_gep.py
++++ b/python/demos/demo_periodic_gep.py
+@@ -26,6 +26,7 @@
+ # where A and B are real symmetric positive definite matrices. The generalized
+ # eigenvalue problem is solved using SLEPc and the computed eigenvalues are
+ # compared to the exact ones.
++from __future__ import annotations
+ 
+ from pathlib import Path
+ from typing import List, Tuple
+diff --git a/python/demos/demo_stokes.py b/python/demos/demo_stokes.py
+index 31ac6d8a..8258cc8e 100644
+--- a/python/demos/demo_stokes.py
++++ b/python/demos/demo_stokes.py
+@@ -9,6 +9,8 @@
+ # We start by the various modules required for this demo
+ 
+ # +
++from __future__ import annotations
++
+ from pathlib import Path
+ from typing import Union
+ 
+diff --git a/python/demos/demo_stokes_nest.py b/python/demos/demo_stokes_nest.py
+index 5de4c4fd..58726710 100644
+--- a/python/demos/demo_stokes_nest.py
++++ b/python/demos/demo_stokes_nest.py
+@@ -9,6 +9,7 @@
+ # The demos solves the Stokes problem using the nest functionality to
+ # avoid using mixed function spaces. The demo also illustrates how to use
+ #  block preconditioners with PETSc
++from __future__ import annotations
+ 
+ from pathlib import Path
+ 
+diff --git a/python/dolfinx_mpc/__init__.py b/python/dolfinx_mpc/__init__.py
+index 14cfdb8c..573d218f 100644
+--- a/python/dolfinx_mpc/__init__.py
++++ b/python/dolfinx_mpc/__init__.py
+@@ -6,6 +6,7 @@
+ """Main module for DOLFINX_MPC"""
+ 
+ # flake8: noqa
++from __future__ import annotations
+ 
+ import dolfinx_mpc.cpp
+ 
+@@ -21,4 +22,4 @@
+ __all__ = ["assemble_matrix", "create_matrix_nest", "assemble_matrix_nest",
+            "assemble_vector", "apply_lifting", "assemble_vector_nest", 
+            "create_vector_nest", "MultiPointConstraint", "LinearProblem",
+-           "create_sparsity_pattern"]
+\ No newline at end of file
++           "create_sparsity_pattern"]
+diff --git a/python/dolfinx_mpc/assemble_matrix.py b/python/dolfinx_mpc/assemble_matrix.py
+index 7f1fefca..e7ba5e6c 100644
+--- a/python/dolfinx_mpc/assemble_matrix.py
++++ b/python/dolfinx_mpc/assemble_matrix.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from typing import Optional, Sequence, Union
+ 
+diff --git a/python/dolfinx_mpc/assemble_vector.py b/python/dolfinx_mpc/assemble_vector.py
+index 9f10afd9..d30ac265 100644
+--- a/python/dolfinx_mpc/assemble_vector.py
++++ b/python/dolfinx_mpc/assemble_vector.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import contextlib
+ from typing import List, Optional, Sequence
+diff --git a/python/dolfinx_mpc/dictcondition.py b/python/dolfinx_mpc/dictcondition.py
+index bb4f7562..8412d80e 100644
+--- a/python/dolfinx_mpc/dictcondition.py
++++ b/python/dolfinx_mpc/dictcondition.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import typing
+ 
+diff --git a/python/dolfinx_mpc/multipointconstraint.py b/python/dolfinx_mpc/multipointconstraint.py
+index 91305cff..6fb1ec7d 100644
+--- a/python/dolfinx_mpc/multipointconstraint.py
++++ b/python/dolfinx_mpc/multipointconstraint.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from typing import Callable, Dict, List, Optional, Tuple, Union
+ 
+diff --git a/python/dolfinx_mpc/numba/__init__.py b/python/dolfinx_mpc/numba/__init__.py
+index 9a640251..291f2e61 100644
+--- a/python/dolfinx_mpc/numba/__init__.py
++++ b/python/dolfinx_mpc/numba/__init__.py
+@@ -6,7 +6,7 @@
+ """Numba extension for dolfinx_mpc"""
+ 
+ # flake8: noqa
+-
++from __future__ import annotations
+ 
+ try:
+     import numba
+@@ -16,4 +16,4 @@
+ from .assemble_matrix import assemble_matrix
+ from .assemble_vector import assemble_vector
+ 
+-__all__ = ["assemble_matrix", "assemble_vector"]
+\ No newline at end of file
++__all__ = ["assemble_matrix", "assemble_vector"]
+diff --git a/python/dolfinx_mpc/numba/assemble_matrix.py b/python/dolfinx_mpc/numba/assemble_matrix.py
+index 9ed04b22..620a29e6 100644
+--- a/python/dolfinx_mpc/numba/assemble_matrix.py
++++ b/python/dolfinx_mpc/numba/assemble_matrix.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from typing import List, Optional, Tuple
+ 
+diff --git a/python/dolfinx_mpc/numba/assemble_vector.py b/python/dolfinx_mpc/numba/assemble_vector.py
+index d73dcee6..1e7655b9 100644
+--- a/python/dolfinx_mpc/numba/assemble_vector.py
++++ b/python/dolfinx_mpc/numba/assemble_vector.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from typing import Optional, Tuple
+ 
+diff --git a/python/dolfinx_mpc/numba/helpers.py b/python/dolfinx_mpc/numba/helpers.py
+index f7ef6d8b..f6fc2bba 100644
+--- a/python/dolfinx_mpc/numba/helpers.py
++++ b/python/dolfinx_mpc/numba/helpers.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import numba
+ import numpy
+diff --git a/python/dolfinx_mpc/numba/numba_setup.py b/python/dolfinx_mpc/numba/numba_setup.py
+index 173ef709..60a0798d 100644
+--- a/python/dolfinx_mpc/numba/numba_setup.py
++++ b/python/dolfinx_mpc/numba/numba_setup.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import ctypes
+ import ctypes.util
+diff --git a/python/dolfinx_mpc/problem.py b/python/dolfinx_mpc/problem.py
+index ef5306e0..d2422b9d 100644
+--- a/python/dolfinx_mpc/problem.py
++++ b/python/dolfinx_mpc/problem.py
+@@ -4,6 +4,7 @@
+ # This file is part of DOLFINx MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import typing
+ 
+diff --git a/python/dolfinx_mpc/utils/__init__.py b/python/dolfinx_mpc/utils/__init__.py
+index 7084be37..3f91e69a 100644
+--- a/python/dolfinx_mpc/utils/__init__.py
++++ b/python/dolfinx_mpc/utils/__init__.py
+@@ -6,6 +6,7 @@
+ """Helper functions for tests in Dolfinx mpc"""
+ 
+ # flake8: noqa
++from __future__ import annotations
+ 
+ from .test import (compare_CSR, compare_mpc_lhs, compare_mpc_rhs,
+                    gather_constants, gather_PETScMatrix, gather_PETScVector,
+diff --git a/python/dolfinx_mpc/utils/mpc_utils.py b/python/dolfinx_mpc/utils/mpc_utils.py
+index 2672e1f7..bce7ef14 100644
+--- a/python/dolfinx_mpc/utils/mpc_utils.py
++++ b/python/dolfinx_mpc/utils/mpc_utils.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from contextlib import ExitStack
+ 
+diff --git a/python/dolfinx_mpc/utils/test.py b/python/dolfinx_mpc/utils/test.py
+index ae493997..699d98b7 100644
+--- a/python/dolfinx_mpc/utils/test.py
++++ b/python/dolfinx_mpc/utils/test.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ __all__ = ["gather_PETScVector", "gather_PETScMatrix", "compare_mpc_lhs", "compare_mpc_rhs",
+            "gather_transformation_matrix", "compare_CSR"]
+diff --git a/python/tests/mwe123.py b/python/tests/mwe123.py
+index f9037882..8d3c46b2 100644
+--- a/python/tests/mwe123.py
++++ b/python/tests/mwe123.py
+@@ -1,3 +1,4 @@
++from __future__ import annotations
+ from dolfinx.mesh import create_unit_square, locate_entities_boundary, meshtags
+ from dolfinx import default_scalar_type
+ from dolfinx import fem
+diff --git a/python/tests/nitsche_ufl.py b/python/tests/nitsche_ufl.py
+index 42890e18..abd4fc8e 100644
+--- a/python/tests/nitsche_ufl.py
++++ b/python/tests/nitsche_ufl.py
+@@ -1,6 +1,7 @@
+ # Copyright (C) 2021 Jørgen S. Dokken and Sarah Roggendorf
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from typing import Dict, Tuple
+ 
+diff --git a/python/tests/test_cube_contact.py b/python/tests/test_cube_contact.py
+index 7ef5bea6..88bd2e2e 100644
+--- a/python/tests/test_cube_contact.py
++++ b/python/tests/test_cube_contact.py
+@@ -6,6 +6,7 @@
+ #
+ # Multi point constraint problem for linear elasticity with slip conditions
+ # between two cubes.
++from __future__ import annotations
+ 
+ import dolfinx.fem as fem
+ import gmsh
+diff --git a/python/tests/test_integration_domains.py b/python/tests/test_integration_domains.py
+index 815bfb22..cafab4d8 100644
+--- a/python/tests/test_integration_domains.py
++++ b/python/tests/test_integration_domains.py
+@@ -3,7 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ import numpy as np
+ import pytest
+diff --git a/python/tests/test_lifting.py b/python/tests/test_lifting.py
+index 22123fa6..186ac8d9 100644
+--- a/python/tests/test_lifting.py
++++ b/python/tests/test_lifting.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ from dolfinx import fem
+ import dolfinx_mpc
+diff --git a/python/tests/test_linear_problem.py b/python/tests/test_linear_problem.py
+index 4d6ccd48..2942fb16 100644
+--- a/python/tests/test_linear_problem.py
++++ b/python/tests/test_linear_problem.py
+@@ -3,7 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ import numpy as np
+ import pytest
+diff --git a/python/tests/test_matrix_assembly.py b/python/tests/test_matrix_assembly.py
+index d5759349..f446f8c5 100644
+--- a/python/tests/test_matrix_assembly.py
++++ b/python/tests/test_matrix_assembly.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import dolfinx.fem as fem
+ import dolfinx_mpc
+diff --git a/python/tests/test_mpc_pipeline.py b/python/tests/test_mpc_pipeline.py
+index 5bb3dbef..c5bccb65 100644
+--- a/python/tests/test_mpc_pipeline.py
++++ b/python/tests/test_mpc_pipeline.py
+@@ -3,7 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ import numpy as np
+ import pytest
+diff --git a/python/tests/test_nonlinear_assembly.py b/python/tests/test_nonlinear_assembly.py
+index c1340ec7..b14d7f9e 100644
+--- a/python/tests/test_nonlinear_assembly.py
++++ b/python/tests/test_nonlinear_assembly.py
+@@ -3,6 +3,8 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
++
+ import basix
+ import dolfinx
+ import dolfinx.fem.petsc
+diff --git a/python/tests/test_rectangular_assembly.py b/python/tests/test_rectangular_assembly.py
+index 382ae8ce..fa3222c7 100644
+--- a/python/tests/test_rectangular_assembly.py
++++ b/python/tests/test_rectangular_assembly.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import basix
+ import dolfinx
+diff --git a/python/tests/test_surface_integral.py b/python/tests/test_surface_integral.py
+index f1f2ef10..cda4fe09 100644
+--- a/python/tests/test_surface_integral.py
++++ b/python/tests/test_surface_integral.py
+@@ -3,7 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
+-
++from __future__ import annotations
+ 
+ import dolfinx.fem as fem
+ import numpy as np
+diff --git a/python/tests/test_vector_assembly.py b/python/tests/test_vector_assembly.py
+index b8a18fda..a13b75a3 100644
+--- a/python/tests/test_vector_assembly.py
++++ b/python/tests/test_vector_assembly.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import dolfinx.fem as fem
+ import dolfinx_mpc
+diff --git a/python/tests/test_vector_poisson.py b/python/tests/test_vector_poisson.py
+index ca2c03af..c97e0d92 100644
+--- a/python/tests/test_vector_poisson.py
++++ b/python/tests/test_vector_poisson.py
+@@ -3,6 +3,7 @@
+ # This file is part of DOLFINX_MPC
+ #
+ # SPDX-License-Identifier:    MIT
++from __future__ import annotations
+ 
+ import dolfinx.fem as fem
+ import numpy as np
