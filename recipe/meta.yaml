@@ -11,7 +11,6 @@ source:
   sha256: edf0e2ec0228d413dea534a023cc97e186075479f8da31143478a7730f35ebc2
   patches:
     - 87.patch
-    - import-mpi.patch
     - import-order.patch
 build:
   number: 0
