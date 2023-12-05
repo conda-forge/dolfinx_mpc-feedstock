@@ -13,8 +13,8 @@ source:
     - 87.patch
     - import-order.patch
 build:
-  number: 0
-  skip: true  # [win or py==311]
+  number: 1
+  skip: true  # [win]
 
   # openmpi oversubscribe env
   script_env:
