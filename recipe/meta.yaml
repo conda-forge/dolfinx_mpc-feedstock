@@ -11,11 +11,10 @@ source:
   sha256: edf0e2ec0228d413dea534a023cc97e186075479f8da31143478a7730f35ebc2
   patches:
     - 87.patch
-    - import-mpi.patch
     - import-order.patch
 build:
-  number: 0
-  skip: true  # [win or py==311]
+  number: 1
+  skip: true  # [win]
 
   # openmpi oversubscribe env
   script_env:
