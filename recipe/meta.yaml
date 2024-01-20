@@ -13,6 +13,9 @@ source:
 build:
   number: 0
   skip: true  # [win]
+  # FIXME: conda-build 3.28.3 overlinking check is broken
+  overlinking_ignore_patterns:
+    - "*"
 
   # openmpi oversubscribe env
   script_env:
