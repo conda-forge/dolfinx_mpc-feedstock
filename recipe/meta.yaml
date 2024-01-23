@@ -1,5 +1,5 @@
 {% set name = "dolfinx_mpc" %}
-{% set version = "0.7.1" %}
+{% set version = "0.7.2" %}
 {% set major_minor = version.rsplit(".", 1)[0] %}
 
 package:
@@ -8,11 +8,15 @@ package:
 
 source:
   url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: eb9595adac26213c731fac53be361f8f4b9e22bd4ba611101b326958949ac9b9
+  sha256: decf73dac8688ed235b8ee357b763d80a0d477110f35757117c1de649930c71a
 
 build:
   number: 0
   skip: true  # [win]
+  skip: true  # [osx and mpi == 'openmpi']
+  # FIXME: conda-build 3.28.3 overlinking check is broken
+  overlinking_ignore_patterns:
+    - "*"
 
   # openmpi oversubscribe env
   script_env:
@@ -20,7 +24,9 @@ build:
     - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
     - OMPI_MCA_rmaps_base_oversubscribe=1
     - OMPI_MCA_plm=isolated
+    - OMPI_MCA_btl=vader,self
     - OMPI_MCA_btl_vader_single_copy_mechanism=none
+    - MPIEXEC_TIMEOUT=120
 
 outputs:
   - name: libdolfinx_mpc
