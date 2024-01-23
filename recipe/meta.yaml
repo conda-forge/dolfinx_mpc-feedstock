@@ -13,6 +13,7 @@ source:
 build:
   number: 0
   skip: true  # [win]
+  skip: true  # [osx and mpi == 'openmpi']
   # FIXME: conda-build 3.28.3 overlinking check is broken
   overlinking_ignore_patterns:
     - "*"
