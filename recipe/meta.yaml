@@ -1,5 +1,5 @@
 {% set name = "dolfinx_mpc" %}
-{% set version = "0.7.2" %}
+{% set version = "0.8.0" %}
 {% set major_minor = version.rsplit(".", 1)[0] %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: decf73dac8688ed235b8ee357b763d80a0d477110f35757117c1de649930c71a
+  sha256: 4c77ce49b28b04974205f62dc04d5324168f8d2275f6ee4d7fa24aa4e0ac2eaa
 
 build:
   number: 0
@@ -40,6 +40,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - cmake
         - make
         - pkg-config
@@ -66,6 +67,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake
         - make
