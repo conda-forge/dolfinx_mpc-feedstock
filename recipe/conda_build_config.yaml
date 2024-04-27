@@ -1,7 +1,6 @@
 mpi:
-  # TODO: add openmpi after merge
   - mpich
-  - openmpi
+  - openmpi  # [not osx]
 scalar:
   - real
   - complex

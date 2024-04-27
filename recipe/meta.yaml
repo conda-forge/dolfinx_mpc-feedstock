@@ -12,8 +12,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
-  skip: true  # [osx and mpi == 'openmpi']
+  skip: true  # [win or py<39]
 
   # openmpi oversubscribe env
   script_env:
