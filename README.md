@@ -76,20 +76,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpimpichpython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpimpichpython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_mpimpichpython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpimpichpython3.8.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_64_mpimpichpython3.9.____cpythonscalarcomplex</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
@@ -143,20 +129,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpiopenmpipython3.12.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_mpiopenmpipython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpiopenmpipython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_mpiopenmpipython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpiopenmpipython3.8.____cpythonscalarreal" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -216,20 +188,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpimpichpython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpimpichpython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_mpimpichpython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpimpichpython3.8.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_aarch64_mpimpichpython3.9.____cpythonscalarcomplex</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
@@ -283,20 +241,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpiopenmpipython3.12.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_mpiopenmpipython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpiopenmpipython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_mpiopenmpipython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpiopenmpipython3.8.____cpythonscalarreal" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -356,20 +300,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpimpichpython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpimpichpython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_mpimpichpython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpimpichpython3.8.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>linux_ppc64le_mpimpichpython3.9.____cpythonscalarcomplex</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
@@ -423,20 +353,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpiopenmpipython3.12.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_mpiopenmpipython3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpiopenmpipython3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_mpiopenmpipython3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpiopenmpipython3.8.____cpythonscalarreal" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -496,20 +412,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_python3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.8.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_python3.9.____cpythonscalarcomplex</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
@@ -563,20 +465,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.12.____cpythonscalarreal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.8.____cpythonscalarcomplex</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.8.____cpythonscalarcomplex" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.8.____cpythonscalarreal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18677&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/dolfinx_mpc-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.8.____cpythonscalarreal" alt="variant">
                 </a>
               </td>
             </tr><tr>

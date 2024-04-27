@@ -26,12 +26,6 @@ jobs:
       osx_64_python3.12.____cpythonscalarreal:
         CONFIG: osx_64_python3.12.____cpythonscalarreal
         UPLOAD_PACKAGES: 'True'
-      osx_64_python3.8.____cpythonscalarcomplex:
-        CONFIG: osx_64_python3.8.____cpythonscalarcomplex
-        UPLOAD_PACKAGES: 'True'
-      osx_64_python3.8.____cpythonscalarreal:
-        CONFIG: osx_64_python3.8.____cpythonscalarreal
-        UPLOAD_PACKAGES: 'True'
       osx_64_python3.9.____cpythonscalarcomplex:
         CONFIG: osx_64_python3.9.____cpythonscalarcomplex
         UPLOAD_PACKAGES: 'True'
@@ -55,12 +49,6 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       osx_arm64_python3.12.____cpythonscalarreal:
         CONFIG: osx_arm64_python3.12.____cpythonscalarreal
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_python3.8.____cpythonscalarcomplex:
-        CONFIG: osx_arm64_python3.8.____cpythonscalarcomplex
-        UPLOAD_PACKAGES: 'True'
-      osx_arm64_python3.8.____cpythonscalarreal:
-        CONFIG: osx_arm64_python3.8.____cpythonscalarreal
         UPLOAD_PACKAGES: 'True'
       osx_arm64_python3.9.____cpythonscalarcomplex:
         CONFIG: osx_arm64_python3.9.____cpythonscalarcomplex
