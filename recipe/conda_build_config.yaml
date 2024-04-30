@@ -1,7 +1,8 @@
+c_stdlib_version:       # [osx and x86]
+  - '10.13'             # [osx and x86]
 mpi:
-  # TODO: add openmpi after merge
   - mpich
-  - openmpi
+  - openmpi  # [not osx]
 scalar:
   - real
   - complex
