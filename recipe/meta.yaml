@@ -102,7 +102,7 @@ outputs:
         - scipy
       commands:
         - pytest -vs python/tests
-        - mpirun -n 2 pytest python/tests
+        - mpiexec -n 2 pytest python/tests
         - pip check
 
 about:
