@@ -99,7 +99,9 @@ outputs:
         - scipy
       commands:
         - pytest -vs python/tests
-        - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
+        - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests  # [mpi != 'openmpi']
+        # openmpi bug in MPIEXEC_TIMEOUT
+        - mpiexec --timeout=300 -n 2 pytest python/tests  # [mpi == 'openmpi']
         - pip check
 
 about:
