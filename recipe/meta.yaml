@@ -38,7 +38,9 @@ outputs:
         - fenics-libdolfinx {{ major_minor }}
         - fenics-libbasix {{ major_minor }}
         - fenics-ufcx {{ major_minor }}
+        - fmt
         - {{ mpi }}
+        - spdlog
         - petsc
         - petsc * {{ scalar }}_*
       run:
