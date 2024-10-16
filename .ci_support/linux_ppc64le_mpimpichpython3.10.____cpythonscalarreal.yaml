@@ -18,6 +18,8 @@ cxx_compiler_version:
 - '13'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
+fmt:
+- '10'
 mpi:
 - mpich
 mpich:
@@ -34,6 +36,8 @@ python:
 - 3.10.* *_cpython
 scalar:
 - real
+spdlog:
+- '1.12'
 target_platform:
 - linux-ppc64le
 zip_keys:
