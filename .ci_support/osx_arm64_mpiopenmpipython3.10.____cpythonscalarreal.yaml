@@ -18,6 +18,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '17'
+fmt:
+- '10'
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi:
@@ -27,7 +29,7 @@ mpich:
 openmpi:
 - '5'
 petsc:
-- '3.21'
+- '3.22'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -36,10 +38,10 @@ python:
 - 3.10.* *_cpython
 scalar:
 - real
+spdlog:
+- '1.13'
 target_platform:
 - osx-arm64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - python
-  - channel_sources
