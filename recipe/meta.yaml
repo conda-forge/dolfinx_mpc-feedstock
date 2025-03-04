@@ -1,5 +1,5 @@
 {% set name = "dolfinx_mpc" %}
-{% set version = "0.9.0" %}
+{% set version = "0.9.1" %}
 {% set major_minor = version.rsplit(".", 1)[0] %}
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://github.com/jorgensd/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 9b87cd75e3b26b3f92b600e935c45677624c8e169782bf6646265d1e03a0e043
+  sha256: 2d0c3583b8d69ad4374b0938cd157c9ca48acf50d6969e51ccce8ab14625040e
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win or py<39]
   force_use_keys:
     # required for the py< above to actually skip builds
