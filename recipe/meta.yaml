@@ -100,6 +100,7 @@ outputs:
         - python-gmsh
         - scipy
       commands:
+        - export UCX_MEM_EVENTS=no
         - pytest -vs python/tests
         - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests  # [mpi != 'openmpi']
         # openmpi bug in MPIEXEC_TIMEOUT
