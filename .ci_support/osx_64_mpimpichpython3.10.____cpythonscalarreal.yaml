@@ -39,7 +39,7 @@ python:
 scalar:
 - real
 spdlog:
-- '1.14'
+- '1.15'
 target_platform:
 - osx-64
 zip_keys:

@@ -37,7 +37,7 @@ python:
 scalar:
 - complex
 spdlog:
-- '1.14'
+- '1.15'
 target_platform:
 - linux-ppc64le
 zip_keys:
