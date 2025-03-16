@@ -101,6 +101,8 @@ outputs:
         - scipy
       commands:
         - export UCX_MEM_EVENTS=no
+        # workaround weird gmsh issue
+        - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so.0  # [mpi == 'openmpi' and target_platform == 'linux-aarch64']
         - pytest -vs python/tests
         - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests  # [mpi != 'openmpi']
         # openmpi bug in MPIEXEC_TIMEOUT
