@@ -109,9 +109,7 @@ outputs:
               - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
           - pip check
           - pytest -vs python/tests
-          - if: mpi == "openmpi"
-            then: mpiexec --timeout=300 -n 2 pytest python/tests
-            else: MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
+          - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
 
 about:
   summary: Multi-point constraints with FEniCS-X
