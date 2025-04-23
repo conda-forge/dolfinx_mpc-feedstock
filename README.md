@@ -15,7 +15,6 @@ Documentation: https://jorgensd.github.io/dolfinx_mpc
 
 This library contains an add-on to FEniCSx enabling the possibilities of enforce multi-point constraints
 
-
 Current build status
 ====================
 
