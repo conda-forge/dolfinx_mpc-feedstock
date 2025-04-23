@@ -1,0 +1,130 @@
+schema_version: 1
+
+context:
+  name: dolfinx_mpc
+  version: 0.9.1
+  major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
+
+recipe:
+  name: ${{ name|lower }}-split
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 2d0c3583b8d69ad4374b0938cd157c9ca48acf50d6969e51ccce8ab14625040e
+
+build:
+  number: 2
+  skip: win
+
+outputs:
+  - package:
+      name: libdolfinx_mpc
+    build:
+      script: build-cpp
+      variant:
+        use_keys:
+          - python
+    requirements:
+      build:
+        - ${{ compiler("cxx") }}
+        - ${{ stdlib("c") }}
+        - cmake
+        - make
+        - pkg-config
+        - if: "mpi == 'openmpi' and build_platform != target_platform"
+          then: ${{ mpi }}
+      host:
+        - fenics-libdolfinx ${{ major_minor }}
+        - fenics-libbasix ${{ major_minor }}
+        - fenics-ufcx ${{ major_minor }}
+        - ${{ mpi }}
+        - petsc
+        - petsc * ${{ scalar }}_*
+      run_exports:
+        weak:
+          - ${{ mpi }}
+          - petsc * ${{ scalar }}_*
+          - ${{ pin_subpackage("libdolfinx_mpc", upper_bound="x.x") }}
+    tests:
+      - package_contents:
+          lib:
+            - libdolfinx_mpc
+  - package:
+      name: dolfinx_mpc
+    build:
+      script: build-py
+    requirements:
+      build:
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler('cxx') }}
+        - cmake
+        - make
+        - pkg-config
+        - if: build_platform != target_platform
+          then:
+            - if: mpi == "openmpi"
+              then:
+                - ${{ mpi }}
+            - cross-python_${{ target_platform }}
+            - python
+            - nanobind
+      host:
+        - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
+        - fenics-libbasix ${{ major_minor }}
+        - fenics-basix ${{ major_minor }}
+        - fenics-libdolfinx ${{ major_minor }}
+        - fenics-dolfinx ${{ major_minor }}
+        - fmt
+        - ${{ mpi }}
+        - spdlog
+        - petsc
+        - petsc * ${{ scalar }}_*
+        - pip
+        - python
+        - scikit-build-core
+        - nanobind
+      run:
+        - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
+        - fenics-basix
+        - fenics-dolfinx
+        - numpy >=1.21
+      run_constraints:
+        - ${{ pin_compatible("nanobind", upper_bound="x.x") }}
+    tests:
+      - files:
+          source:
+            - python/tests/
+        requirements:
+          run:
+            - pip
+            - pytest
+            - pytest-asyncio
+            - python-gmsh
+            - scipy
+        script:
+          - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
+            then: 
+              - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
+          - pip check
+          - pytest -vs python/tests
+          - if: mpi == "openmpi"
+            then: mpiexec --timeout=300 -n 2 pytest python/tests
+            else: MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
+
+about:
+  summary: Multi-point constraints with FEniCS-X
+  description: |
+    This library contains an add-on to FEniCSx enabling the possibilities of enforce multi-point constraints
+  license: MIT
+  license_file: LICENSE
+  homepage: "https://github.com/jorgensd/dolfinx_mpc"
+  repository: "https://github.com/jorgensd/dolfinx_mpc"
+  documentation: "https://jorgensd.github.io/dolfinx_mpc"
+
+extra:
+  feedstock-name: dolfinx_mpc
+  recipe-maintainers:
+    - jorgensd
+    - minrk
