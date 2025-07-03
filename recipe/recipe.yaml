@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: 0.9.1
+  version: "0.9.2"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
 
 recipe:
@@ -11,10 +11,10 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 2d0c3583b8d69ad4374b0938cd157c9ca48acf50d6969e51ccce8ab14625040e
+  sha256: 8681def964aef0101b7e35aa377cfbcc4b220a20cfc540ec9058b324031b58c2
 
 build:
-  number: 2
+  number: 0
   skip: win
 
 outputs:
@@ -105,7 +105,7 @@ outputs:
             - scipy
         script:
           - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
-            then: 
+            then:
               - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
           - pip check
           - pytest -vs python/tests
