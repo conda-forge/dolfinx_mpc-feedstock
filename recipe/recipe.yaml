@@ -104,12 +104,17 @@ outputs:
             - python-gmsh
             - scipy
         script:
-          - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
-            then:
-              - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
-          - pip check
-          - pytest -vs python/tests
-          - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
+          content:
+            - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
+              then:
+                - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
+            - pip check
+            - pytest -vs python/tests
+            - mpiexec -n 2 pytest python/tests
+          env:
+            # workaround https://github.com/prefix-dev/rattler-build/issues/1317
+            CONDA_BUILD: "1"
+            MPIEXEC_TIMEOUT: "300"
 
 about:
   summary: Multi-point constraints with FEniCS-X
