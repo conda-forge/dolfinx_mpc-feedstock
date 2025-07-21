@@ -131,7 +131,7 @@ jobs:
       linux_aarch64_mpiopenmpipython3.10.____cpythonscalarcomplex:
         CONFIG: linux_aarch64_mpiopenmpipython3.10.____cpythonscalarcomplex
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+        DOCKER_IMAGE: qulinux_64_mpimpichpython3ay.io/condaforge/linux-anvil-x86_64:alma9
       linux_aarch64_mpiopenmpipython3.10.____cpythonscalarreal:
         CONFIG: linux_aarch64_mpiopenmpipython3.10.____cpythonscalarreal
         UPLOAD_PACKAGES: 'True'
@@ -199,3 +199,4 @@ jobs:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
       FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
+      PRTE_MCA_rmaps_default_mapping_policy: :oversubscribe
