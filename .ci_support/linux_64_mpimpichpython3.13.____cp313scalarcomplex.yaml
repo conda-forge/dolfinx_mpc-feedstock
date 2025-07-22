@@ -24,6 +24,8 @@ mpi:
 - mpich
 mpich:
 - '4'
+nanobind:
+- '2.1'
 openmpi:
 - '5'
 petsc:
