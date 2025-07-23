@@ -14,7 +14,7 @@ source:
   sha256: 2d0c3583b8d69ad4374b0938cd157c9ca48acf50d6969e51ccce8ab14625040e
 
 build:
-  number: 2
+  number: 3
   skip: win
 
 outputs:
@@ -105,7 +105,7 @@ outputs:
             - scipy
         script:
           - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
-            then: 
+            then:
               - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
           - pip check
           - pytest -vs python/tests
