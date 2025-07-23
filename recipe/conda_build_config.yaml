@@ -1,6 +1,8 @@
 # match upstream
-nanobind:
-  - "2.1"
+nanobind_abi:
+  - 15
+
+# matrix
 mpi:
   - mpich
   - openmpi

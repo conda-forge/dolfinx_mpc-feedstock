@@ -4,6 +4,11 @@ context:
   name: dolfinx_mpc
   version: "0.9.2"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
+  # nanobind abi:
+  # cxx_compiler_version not specified on Windows
+  # extract from cxx_compiler
+  cxx_compiler_version: ${{ cxx_compiler_version | default(cxx_compiler | replace("vs", "")) }}
+  abi_version: 1.${{ nanobind_abi }}.${{ cxx_compiler_version }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -70,6 +75,8 @@ outputs:
             - cross-python_${{ target_platform }}
             - python
             - nanobind
+            - nanobind-abi
+        - fenics-basix-nanobind-abi ${{ abi_version }}.*
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-libbasix ${{ major_minor }}
@@ -85,6 +92,8 @@ outputs:
         - python
         - scikit-build-core
         - nanobind
+        - nanobind-abi
+        - fenics-basix-nanobind-abi ${{ abi_version }}.*
       run:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-basix
