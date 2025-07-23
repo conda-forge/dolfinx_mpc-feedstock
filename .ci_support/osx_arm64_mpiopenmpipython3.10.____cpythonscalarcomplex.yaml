@@ -19,15 +19,15 @@ cxx_compiler:
 cxx_compiler_version:
 - '19'
 fmt:
-- '11.1'
+- '11.2'
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi:
 - openmpi
 mpich:
 - '4'
-nanobind_abi:
-- '15'
+nanobind:
+- '2.8'
 openmpi:
 - '5'
 petsc:
