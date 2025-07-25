@@ -2,8 +2,14 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: 0.9.1
+  version: "0.9.2"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
+  # nanobind abi:
+  # cxx_compiler_version not specified on Windows
+  # extract from cxx_compiler
+  cxx_compiler_version: ${{ cxx_compiler_version | default(cxx_compiler | replace("vs", "")) }}
+  # abi_version: 1.${{ nanobind_abi }}.${{ cxx_compiler_version }}
+  abi_version: 0.${{ nanobind }}.${{ cxx_compiler_version }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -11,10 +17,10 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 2d0c3583b8d69ad4374b0938cd157c9ca48acf50d6969e51ccce8ab14625040e
+  sha256: 8681def964aef0101b7e35aa377cfbcc4b220a20cfc540ec9058b324031b58c2
 
 build:
-  number: 3
+  number: 1
   skip: win
 
 outputs:
@@ -70,6 +76,8 @@ outputs:
             - cross-python_${{ target_platform }}
             - python
             - nanobind
+            # - nanobind-abi
+        - fenics-basix-nanobind-abi ${{ abi_version }}.*
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-libbasix ${{ major_minor }}
@@ -85,6 +93,8 @@ outputs:
         - python
         - scikit-build-core
         - nanobind
+        # - nanobind-abi
+        - fenics-basix-nanobind-abi ${{ abi_version }}.*
       run:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-basix
@@ -104,12 +114,17 @@ outputs:
             - python-gmsh
             - scipy
         script:
-          - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
-            then:
-              - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
-          - pip check
-          - pytest -vs python/tests
-          - MPIEXEC_TIMEOUT=300 mpiexec -n 2 pytest python/tests
+          content:
+            - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
+              then:
+                - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
+            - pip check
+            - pytest -vs python/tests
+            - mpiexec -n 2 pytest python/tests
+          env:
+            # workaround https://github.com/prefix-dev/rattler-build/issues/1317
+            CONDA_BUILD: "1"
+            MPIEXEC_TIMEOUT: "300"
 
 about:
   summary: Multi-point constraints with FEniCS-X
