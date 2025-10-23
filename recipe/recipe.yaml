@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: "0.9.3"
+  version: "0.10.0"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
   # nanobind abi:
   # cxx_compiler_version not specified on Windows
@@ -17,7 +17,7 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: efa312cc498e428aab44acccc9bb0c74c200eda005742de7778c8e68fa84e8df
+  sha256: 166651cb20f65c9efdff53dfa7f74365f4537e7682b0ac02447e65bf935595ae
 
 build:
   number: 0
