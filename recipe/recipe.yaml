@@ -8,7 +8,7 @@ context:
   # cxx_compiler_version not specified on Windows
   # extract from cxx_compiler
   cxx_compiler_version: ${{ cxx_compiler_version | default(cxx_compiler | replace("vs", "")) }}
-  abi_version: 0.${{ nanobind }}.${{ cxx_compiler_version }}
+  abi_version: 2.${{ nanobind_abi }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -75,7 +75,7 @@ outputs:
             - cross-python_${{ target_platform }}
             - python
             - nanobind
-            # - nanobind-abi
+            - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
@@ -92,7 +92,7 @@ outputs:
         - python
         - scikit-build-core
         - nanobind
-        # - nanobind-abi
+        - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
       run:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
