@@ -4,11 +4,11 @@ context:
   name: dolfinx_mpc
   version: "0.10.0"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
-  # nanobind abi:
-  # cxx_compiler_version not specified on Windows
-  # extract from cxx_compiler
-  cxx_compiler_version: ${{ cxx_compiler_version | default(cxx_compiler | replace("vs", "")) }}
   abi_version: 2.${{ nanobind_abi }}
+  abi3_python: "3.12"
+  build_abi3: ${{ match(python, abi3_python + ".*") and is_abi3 }}
+  skip_build: ${{ match(python, ">=3.13") and is_abi3 }}
+  abi3_tag: ${{ "cp312" if build_abi3 else "" }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -58,7 +58,13 @@ outputs:
   - package:
       name: dolfinx_mpc
     build:
-      script: build-py
+      script:
+        file: build-py
+        env:
+          SKBUILD_BUILD_VERBOSE: "true"
+          SKBUILD_WHEEL_PY_API: ${{ abi3_tag }}
+      python:
+        version_independent: ${{ build_abi3 }}
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -94,6 +100,9 @@ outputs:
         - nanobind
         - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
+        - if: build_abi3
+          then:
+            - python-abi3
       run:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-basix
