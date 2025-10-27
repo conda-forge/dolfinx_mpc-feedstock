@@ -21,8 +21,10 @@ source:
     - 0001-nanobind-abi.patch
 build:
   number: 0
-  skip: win
-
+  skip:
+    - win
+    - match(python, "<3.10")
+    - skip_build
 outputs:
   - package:
       name: libdolfinx_mpc
