@@ -1,0 +1,46 @@
+diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
+index 7d2ffe6..f37d556 100644
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
+@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21)
+ PROJECT(dolfinx_mpc_nanobind)
+ 
+ 
+-find_package(Python COMPONENTS Interpreter Development REQUIRED)
++find_package(Python COMPONENTS Interpreter Development ${SKBUILD_SABI_COMPONENT} REQUIRED)
+ 
+ # Detect the installed nanobind package and import it into CMake
+ execute_process(
+@@ -35,16 +35,32 @@ if (DOLFINX_MPC_FOUND)
+   message(STATUS "Found DOLFINx_MPC at ${DOLFINX_MPC_DIR}")
+ endif()
+ 
++if(NOT "${SKBUILD_SABI_VERSION}" STREQUAL "")
++  set(NANOBIND_SABI "STABLE_ABI")
++endif()
++
+ # Create the binding library nanobind handles its own calls to
+ # target_link_libraries
+ nanobind_add_module(
+   cpp
++  ${NANOBIND_SABI}
+   NOMINSIZE
+   MODULE
+   src/dolfinx_mpc/dolfinx_mpc.cpp
+   src/dolfinx_mpc/mpc.cpp
+ )
+ 
++if(NANOBIND_SABI)
++  # mpi4py and petsc4py use generated Cython headers so tell
++  # them that the limited API is in use.
++  target_compile_definitions(cpp PRIVATE MPI4PY_LIMITED_API=1)
++  # Needing to set CYTHON_COMPILING_IN_LIMITED_API is a bug in
++  # Cython-generated API headers, should become unnecessary with
++  # mpi4py/petsc4py releases published using Cython >= 3.1.4
++  # https://github.com/cython/cython/issues/7108
++  target_compile_definitions(cpp PRIVATE CYTHON_COMPILING_IN_LIMITED_API=1)
++endif()
++
+ target_compile_definitions(cpp PRIVATE cxx_std_20)
+ target_link_libraries(cpp PRIVATE dolfinx_mpc)
+ 

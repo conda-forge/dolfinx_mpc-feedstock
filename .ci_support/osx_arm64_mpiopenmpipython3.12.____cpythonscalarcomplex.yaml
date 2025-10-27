@@ -20,6 +20,8 @@ cxx_compiler_version:
 - '19'
 fmt:
 - '11.2'
+is_abi3:
+- true
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi:
@@ -27,11 +29,13 @@ mpi:
 mpich:
 - '4'
 nanobind:
-- '2.8'
+- '2.9'
+nanobind_abi:
+- '16'
 openmpi:
 - '5'
 petsc:
-- '3.23'
+- '3.24'
 pin_run_as_build:
   python:
     min_pin: x.x

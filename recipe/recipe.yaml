@@ -2,14 +2,13 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: "0.9.3"
+  version: "0.10.0"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
-  # nanobind abi:
-  # cxx_compiler_version not specified on Windows
-  # extract from cxx_compiler
-  cxx_compiler_version: ${{ cxx_compiler_version | default(cxx_compiler | replace("vs", "")) }}
-  # abi_version: 1.${{ nanobind_abi }}.${{ cxx_compiler_version }}
-  abi_version: 0.${{ nanobind }}.${{ cxx_compiler_version }}
+  abi_version: 2.${{ nanobind_abi }}
+  abi3_python: "3.12"
+  build_abi3: ${{ match(python, abi3_python + ".*") and is_abi3 }}
+  skip_build: ${{ match(python, ">=3.13") and is_abi3 }}
+  abi3_tag: ${{ "cp312" if build_abi3 else "" }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -17,12 +16,15 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: efa312cc498e428aab44acccc9bb0c74c200eda005742de7778c8e68fa84e8df
-
+  sha256: 166651cb20f65c9efdff53dfa7f74365f4537e7682b0ac02447e65bf935595ae
+  patches:
+    - 0001-nanobind-abi.patch
 build:
   number: 0
-  skip: win
-
+  skip:
+    - win
+    - match(python, "<3.10")
+    - skip_build
 outputs:
   - package:
       name: libdolfinx_mpc
@@ -59,7 +61,13 @@ outputs:
   - package:
       name: dolfinx_mpc
     build:
-      script: build-py
+      script:
+        file: build-py
+        env:
+          SKBUILD_BUILD_VERBOSE: "true"
+          SKBUILD_WHEEL_PY_API: ${{ abi3_tag }}
+      python:
+        version_independent: ${{ build_abi3 }}
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -76,7 +84,7 @@ outputs:
             - cross-python_${{ target_platform }}
             - python
             - nanobind
-            # - nanobind-abi
+            - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
@@ -93,8 +101,11 @@ outputs:
         - python
         - scikit-build-core
         - nanobind
-        # - nanobind-abi
+        - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
+        - if: build_abi3
+          then:
+            - python-abi3
       run:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-basix
@@ -113,6 +124,13 @@ outputs:
             - pytest-asyncio
             - python-gmsh
             - scipy
+            - if: linux and aarch64
+              then:
+                - libgl-devel
+                # seem to be getting nvpl on py310 for some reason
+                # which doesn't have sparse symbols
+                #
+                - blas[build=openblas]
         script:
           content:
             - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
@@ -124,7 +142,7 @@ outputs:
           env:
             # workaround https://github.com/prefix-dev/rattler-build/issues/1317
             CONDA_BUILD: "1"
-            MPIEXEC_TIMEOUT: "300"
+            MPIEXEC_TIMEOUT: "600"
 
 about:
   summary: Multi-point constraints with FEniCS-X
