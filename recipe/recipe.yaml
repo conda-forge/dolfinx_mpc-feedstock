@@ -124,6 +124,13 @@ outputs:
             - pytest-asyncio
             - python-gmsh
             - scipy
+            - if: linux and aarch64
+              then:
+                - libgl-devel
+                # seem to be getting nvpl on py310 for some reason
+                # which doesn't have sparse symbols
+                #
+                - blas[build=openblas]
         script:
           content:
             - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
