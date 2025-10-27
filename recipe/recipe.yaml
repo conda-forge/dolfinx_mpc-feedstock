@@ -142,7 +142,7 @@ outputs:
           env:
             # workaround https://github.com/prefix-dev/rattler-build/issues/1317
             CONDA_BUILD: "1"
-            MPIEXEC_TIMEOUT: "300"
+            MPIEXEC_TIMEOUT: "600"
 
 about:
   summary: Multi-point constraints with FEniCS-X
