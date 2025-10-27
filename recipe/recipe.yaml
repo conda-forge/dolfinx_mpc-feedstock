@@ -17,7 +17,8 @@ recipe:
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 166651cb20f65c9efdff53dfa7f74365f4537e7682b0ac02447e65bf935595ae
-
+  patches:
+    - 0001-nanobind-abi.patch
 build:
   number: 0
   skip: win
