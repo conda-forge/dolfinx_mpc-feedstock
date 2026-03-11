@@ -88,6 +88,9 @@ outputs:
             - nanobind
             - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
+        - ${{ mpi }}
+        - mpi4py
+
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
         - fenics-libbasix ${{ major_minor }}
@@ -96,6 +99,7 @@ outputs:
         - fenics-dolfinx ${{ major_minor }}
         - fmt
         - ${{ mpi }}
+        - mpi4py
         - spdlog
         - petsc
         - petsc * ${{ scalar }}_*
