@@ -91,6 +91,8 @@ outputs:
         - ${{ mpi }}
         - mpi4py
         - petsc4py
+        - fenics-dolfinx ${{ major_minor }}
+        - petsc * ${{ scalar }}_*
 
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
