@@ -4,11 +4,14 @@ context:
   name: dolfinx_mpc
   version: "0.10.0"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
-  abi_version: 2.${{ nanobind_abi }}
+  # Python Stable ABI (SABI with nanobind requires 3.12)
+  abi3_tag: cp312
   abi3_python: "3.12"
-  build_abi3: ${{ match(python, abi3_python + ".*") and is_abi3 }}
-  skip_build: ${{ match(python, ">=3.13") and is_abi3 }}
-  abi3_tag: ${{ "cp312" if build_abi3 else "" }}
+  build_abi3: ${{ is_abi3 and match(python, abi3_python + ".*") }}
+  skip_abi3: ${{ is_abi3 and match(python, ">=3.13") }}
+
+  # nanobind abi:
+  abi_version: 2.${{ nanobind_abi }}
 
 recipe:
   name: ${{ name|lower }}-split
@@ -24,7 +27,7 @@ build:
   skip:
     - win
     - match(python, "<3.10")
-    - skip_build
+    - skip_abi3
 outputs:
   - package:
       name: libdolfinx_mpc
