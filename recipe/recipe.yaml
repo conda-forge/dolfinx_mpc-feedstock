@@ -51,6 +51,7 @@ outputs:
         - ${{ mpi }}
         - petsc
         - petsc * ${{ scalar }}_*
+        - mpi4py
       run_exports:
         weak:
           - ${{ mpi }}
