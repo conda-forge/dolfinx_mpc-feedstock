@@ -90,6 +90,7 @@ outputs:
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
         - ${{ mpi }}
         - mpi4py
+        - petsc4py
 
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
