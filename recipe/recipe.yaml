@@ -51,7 +51,6 @@ outputs:
         - ${{ mpi }}
         - petsc
         - petsc * ${{ scalar }}_*
-        - mpi4py
       run_exports:
         weak:
           - ${{ mpi }}
@@ -106,6 +105,7 @@ outputs:
         - nanobind
         - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
+        - mpi4py
         - if: build_abi3
           then:
             - python-abi3
