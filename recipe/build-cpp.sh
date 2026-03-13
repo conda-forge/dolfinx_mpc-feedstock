@@ -8,7 +8,6 @@ fi
 cmake \
   ${CMAKE_ARGS} \
   -DCMAKE_BUILD_TYPE=Release \
-  -DPython3_FIND_STRATEGY=LOCATION \
   -DCMAKE_CXX_COMPILER=$(basename $CXX) \
   -B build \
   cpp/
