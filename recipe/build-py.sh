@@ -13,7 +13,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
   unset CXXFLAGS
   unset LDFLAGS
   ls $BUILD_PREFIX/etc/conda/activate.d
-  for f in $BUILD_PREFIX/etc/conda/activate.d/*-${target_platform}.sh; do
+  for f in $BUILD_PREFIX/etc/conda/activate.d/*_${target_platform}.sh; do
     echo "reactivating $f"
     source "$f"
   done
