@@ -9,8 +9,14 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
   # workaround double compiler activation
   # https://github.com/conda-forge/ctng-compiler-activation-feedstock/issues/140
   # fenics-dolfinx package needs to switch to gcc_impl instead of ${{ compiler('c') }}
-  export CFLAGS="$(echo ${CFLAGS} | sed 's/ -march=[^ ]*//g' | sed 's/ -mcpu=[^ ]*//g' |sed 's/ -mtune=[^ ]*//g')"
-  export CXXFLAGS="$(echo ${CXXFLAGS} | sed 's/ -march=[^ ]*//g' | sed 's/ -mcpu=[^ ]*//g' |sed 's/ -mtune=[^ ]*//g')"
+  unset CFLAGS
+  unset CXXFLAGS
+  unset LDFLAGS
+  ls $BUILD_PREFIX/etc/conda/activate.d
+  for f in $BUILD_PREFIX/etc/conda/activate.d/*-${target_platform}.sh; do
+    echo "reactivating $f"
+    source "$f"
+  done
 
   # we need:
   # dolfinx.wrappers.get_include_path()
