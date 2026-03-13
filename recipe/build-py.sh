@@ -6,6 +6,12 @@ export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 # cross-compile doesn't allow retrieving include-dirs from Python imports
 # get them ourselves:
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
+  # workaround double compiler activation
+  # https://github.com/conda-forge/ctng-compiler-activation-feedstock/issues/140
+  # fenics-dolfinx package needs to switch to gcc_impl instead of ${{ compiler('c') }}
+  export CFLAGS="$(echo ${CFLAGS} | sed 's/ -march=[^ ]*//g' | sed 's/ -mcpu=[^ ]*//g' |sed 's/ -mtune=[^ ]*//g')"
+  export CXXFLAGS="$(echo ${CXXFLAGS} | sed 's/ -march=[^ ]*//g' | sed 's/ -mcpu=[^ ]*//g' |sed 's/ -mtune=[^ ]*//g')"
+
   # we need:
   # dolfinx.wrappers.get_include_path()
   # petsc4py.get_include()
