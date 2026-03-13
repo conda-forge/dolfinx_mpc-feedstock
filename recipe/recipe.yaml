@@ -154,7 +154,8 @@ outputs:
           env:
             # workaround https://github.com/prefix-dev/rattler-build/issues/1317
             CONDA_BUILD: "1"
-            MPIEXEC_TIMEOUT: "600"
+            # mac tests are quite slow
+            MPIEXEC_TIMEOUT: "1200"
 
 about:
   summary: Multi-point constraints with FEniCS-X
