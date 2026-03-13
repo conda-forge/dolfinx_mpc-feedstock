@@ -49,6 +49,8 @@ outputs:
         - fenics-libbasix ${{ major_minor }}
         - fenics-ufcx ${{ major_minor }}
         - ${{ mpi }}
+        - fmt
+        - spdlog
         - petsc
         - petsc * ${{ scalar }}_*
       run_exports:
