@@ -27,6 +27,9 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
   # make sure these exist
   test -d ${BUILD_SPDIR}/dolfinx/wrappers
   test -d ${BUILD_SPDIR}/petsc4py/include
+
+  # resolve mpiexec on $PATH, FindMPI gets confused with OpenMPI
+  export CMAKE_ARGS="${CMAKE_ARGS} -DMPIEXEC_EXECUTABLE=$(which mpiexec)"
   
   # debug weird prterun error
   export CMAKE_ARGS="${CMAKE_ARGS} --debug-output --trace"
