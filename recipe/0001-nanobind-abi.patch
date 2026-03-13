@@ -2,7 +2,7 @@ diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
 index d326b06..675a15d 100644
 --- a/python/CMakeLists.txt
 +++ b/python/CMakeLists.txt
-@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
+@@ -3,6 +3,6 @@ cmake_minimum_required(VERSION 3.21)
  PROJECT(dolfinx_mpc_nanobind)
  
 -find_package(Python COMPONENTS Interpreter Development REQUIRED)
