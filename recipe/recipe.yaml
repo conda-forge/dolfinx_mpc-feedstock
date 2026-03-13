@@ -20,6 +20,7 @@ source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
   sha256: dd9b4ec651e725587b8321cdf56ae3a9fb41a143416c287ae5a098b2bb743a49
   patches:
+    - cross-python.patch
     - 0001-nanobind-abi.patch
 build:
   number: 0
