@@ -90,11 +90,6 @@ outputs:
             - nanobind
             - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
-        - ${{ mpi }}
-        - mpi4py
-        - petsc4py
-        - fenics-dolfinx ${{ major_minor }}
-        - petsc * ${{ scalar }}_*
 
       host:
         - ${{ pin_subpackage("libdolfinx_mpc", exact=True) }}
@@ -114,7 +109,6 @@ outputs:
         - nanobind
         - nanobind-abi
         - fenics-basix-nanobind-abi ${{ abi_version }}.*
-        - mpi4py
         - if: build_abi3
           then:
             - python-abi3
