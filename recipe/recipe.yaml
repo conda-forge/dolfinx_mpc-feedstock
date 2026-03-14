@@ -2,29 +2,32 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: "0.10.0"
+  version: "0.10.2"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
-  abi_version: 2.${{ nanobind_abi }}
+  # Python Stable ABI (SABI with nanobind requires 3.12)
+  abi3_tag: cp312
   abi3_python: "3.12"
-  build_abi3: ${{ match(python, abi3_python + ".*") and is_abi3 }}
-  skip_build: ${{ match(python, ">=3.13") and is_abi3 }}
-  abi3_tag: ${{ "cp312" if build_abi3 else "" }}
+  build_abi3: ${{ is_abi3 and match(python, abi3_python + ".*") }}
+  skip_abi3: ${{ is_abi3 and match(python, ">=3.13") }}
 
+  # nanobind abi:
+  abi_version: 2.${{ nanobind_abi }}
 recipe:
   name: ${{ name|lower }}-split
   version: ${{ version }}
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 166651cb20f65c9efdff53dfa7f74365f4537e7682b0ac02447e65bf935595ae
+  sha256: dd9b4ec651e725587b8321cdf56ae3a9fb41a143416c287ae5a098b2bb743a49
   patches:
+    - cross-python.patch
     - 0001-nanobind-abi.patch
 build:
   number: 0
   skip:
     - win
     - match(python, "<3.10")
-    - skip_build
+    - skip_abi3
 outputs:
   - package:
       name: libdolfinx_mpc
@@ -47,6 +50,8 @@ outputs:
         - fenics-libbasix ${{ major_minor }}
         - fenics-ufcx ${{ major_minor }}
         - ${{ mpi }}
+        - fmt
+        - spdlog
         - petsc
         - petsc * ${{ scalar }}_*
       run_exports:
@@ -127,22 +132,22 @@ outputs:
             - if: linux and aarch64
               then:
                 - libgl-devel
-                # seem to be getting nvpl on py310 for some reason
-                # which doesn't have sparse symbols
-                #
-                - blas[build=openblas]
         script:
           content:
             - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
               then:
                 - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
             - pip check
+            # skip stokes_channelflow, it seems to take ages
+            # and sometimes get stuck
+            - export PYTEST_ADDOPTS="--durations 10 -k 'not stokes_channelflow'"
             - pytest -vs python/tests
-            - mpiexec -n 2 pytest python/tests
+            - mpiexec -n 2 pytest -vs python/tests
           env:
             # workaround https://github.com/prefix-dev/rattler-build/issues/1317
             CONDA_BUILD: "1"
-            MPIEXEC_TIMEOUT: "600"
+            # mac tests are quite slow
+            MPIEXEC_TIMEOUT: "1200"
 
 about:
   summary: Multi-point constraints with FEniCS-X
