@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: "0.10.2"
+  version: "0.10.3"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
   # Python Stable ABI (SABI with nanobind requires 3.12)
   abi3_tag: cp312
@@ -18,7 +18,7 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: dd9b4ec651e725587b8321cdf56ae3a9fb41a143416c287ae5a098b2bb743a49
+  sha256: 7e42d8a322a46dcf80b850da11622258cab82441d6aa580596eabbaa2a9a6567
   patches:
     - cross-python.patch
     - 0001-nanobind-abi.patch
