@@ -22,6 +22,7 @@ source:
   patches:
     - cross-python.patch
     - 0001-nanobind-abi.patch
+    - 0002-mpc-typo.patch
 build:
   number: 0
   skip:
