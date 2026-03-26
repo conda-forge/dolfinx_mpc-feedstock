@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '14'
 docker_image:
-- quay.io/condaforge/linux-anvil-aarch64:alma9
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 fmt:
 - '12.1'
 is_abi3:
@@ -23,7 +23,7 @@ is_abi3:
 mpi:
 - mpich
 mpich:
-- '4'
+- '5'
 nanobind:
 - '2.9'
 nanobind_abi:
