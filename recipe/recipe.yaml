@@ -24,7 +24,7 @@ source:
     - 0001-nanobind-abi.patch
     - 0002-mpc-typo.patch
 build:
-  number: 0
+  number: 1
   skip:
     - win
     - match(python, "<3.10")
