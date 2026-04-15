@@ -135,6 +135,9 @@ outputs:
                 - libgl-devel
         script:
           content:
+            # workaround https://github.com/prefix-dev/rattler-build/issues/2424
+            # which unsets $HOME
+            - export HOME=${HOME:-$PWD}
             - if: mpi == 'openmpi' and target_platform == 'linux-aarch64'
               then:
                 - export LD_PRELOAD=$PREFIX/lib/libGLdispatch.so
