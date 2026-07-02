@@ -143,8 +143,8 @@ outputs:
             # skip stokes_channelflow, it seems to take ages
             # and sometimes get stuck
             - export PYTEST_ADDOPTS="--durations 10 -k 'not stokes_channelflow'"
-            - python -m pytest -vs python/tests
-            - mpiexec -n 2 python -m pytest -vs python/tests
+            - $PYTHON -m pytest -vs python/tests
+            - mpiexec -n 2 $PYTHON -m pytest -vs python/tests
           env:
             # workaround https://github.com/prefix-dev/rattler-build/issues/1317
             CONDA_BUILD: "1"
