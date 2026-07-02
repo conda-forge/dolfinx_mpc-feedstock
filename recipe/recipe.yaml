@@ -123,8 +123,10 @@ outputs:
             - python/tests/
         requirements:
           run:
-            - ${{ compiler("c") }}
-            - ${{ stdlib("c") }}
+            - if: linux and target_platform != build_platform
+              then:
+                # __glibc virtual package seems to resolve wrong on emulated linux
+                - ${{ stdlib("c") }}
             - pip
             - pytest
             - pytest-asyncio
