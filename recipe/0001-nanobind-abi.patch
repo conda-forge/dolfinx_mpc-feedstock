@@ -1,43 +1,38 @@
 diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
-index d326b06..675a15d 100644
+index dee2740..0c9417f 100644
 --- a/python/CMakeLists.txt
 +++ b/python/CMakeLists.txt
-@@ -3,6 +3,6 @@ cmake_minimum_required(VERSION 3.21)
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
+ 
  PROJECT(dolfinx_mpc_nanobind)
  
 -find_package(Python COMPONENTS Interpreter Development REQUIRED)
 +find_package(Python COMPONENTS Interpreter Development ${SKBUILD_SABI_COMPONENT} REQUIRED)
  
  # Detect the installed nanobind package and import it into CMake
- execute_process(
-@@ -35,15 +35,34 @@ if (DOLFINX_MPC_FOUND)
+ option(DETECT_NANOBIND_DIR "Disable if python3 -m nanobind doesn't work (e.g. cross compilation). If OFF, nanobind must be on CMAKE_PREFIX_PATH." ON)
+@@ -42,16 +42,35 @@ if (DOLFINX_MPC_FOUND)
    message(STATUS "Found DOLFINx_MPC at ${DOLFINX_MPC_DIR}")
  endif()
  
--# Create the binding library nanobind handles its own calls to
--# target_link_libraries
--nanobind_add_module(
--  cpp
--  NOMINSIZE
--  MODULE
--  src/dolfinx_mpc/dolfinx_mpc.cpp
--  src/dolfinx_mpc/mpc.cpp
--)
++# Create the binding library nanobind handles its own calls to
++# target_link_libraries
 +if(NOT "${SKBUILD_SABI_VERSION}" STREQUAL "")
 +  set(NANOBIND_SABI "STABLE_ABI")
 +endif()
 +
-+ # Create the binding library nanobind handles its own calls to
-+ # target_link_libraries
-+ nanobind_add_module(
-+   cpp
-+   ${NANOBIND_SABI}
-+   NOMINSIZE
-+   MODULE
-+   src/dolfinx_mpc/dolfinx_mpc.cpp
-+   src/dolfinx_mpc/mpc.cpp
-+ )
-+
+ # Create the binding library nanobind handles its own calls to
+ # target_link_libraries
+ nanobind_add_module(
+-  cpp
++    cpp
++  ${NANOBIND_SABI}
+   NOMINSIZE
+   MODULE
+   src/dolfinx_mpc/dolfinx_mpc.cpp
+   src/dolfinx_mpc/mpc.cpp
+ )
+ 
 +if(NANOBIND_SABI)
 +  # mpi4py and petsc4py use generated Cython headers so tell
 +  # them that the limited API is in use.
@@ -50,7 +45,6 @@ index d326b06..675a15d 100644
 +endif()
 +
 +
-+
- 
  target_compile_definitions(cpp PRIVATE cxx_std_20)
  target_link_libraries(cpp PRIVATE dolfinx_mpc)
+ 
