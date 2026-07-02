@@ -123,6 +123,8 @@ outputs:
             - python/tests/
         requirements:
           run:
+            - ${{ compiler("c") }}
+            - ${{ stdlib("c") }}
             - pip
             - pytest
             - pytest-asyncio
