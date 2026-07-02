@@ -25,7 +25,7 @@ build:
   number: 0
   skip:
     - win
-    - match(python, "<3.10")
+    - match(python, "<3.11")
     - skip_abi3
 outputs:
   - package:
