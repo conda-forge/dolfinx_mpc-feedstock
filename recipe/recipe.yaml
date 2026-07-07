@@ -150,8 +150,6 @@ outputs:
             - $PYTHON -m pytest -vs python/tests
             - mpiexec -n 2 $PYTHON -m pytest -vs python/tests
           env:
-            # workaround https://github.com/prefix-dev/rattler-build/issues/1317
-            CONDA_BUILD: "1"
             # mac tests are quite slow
             MPIEXEC_TIMEOUT: "1200"
 
