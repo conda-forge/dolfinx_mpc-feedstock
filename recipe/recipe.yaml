@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: dolfinx_mpc
-  version: "0.10.5"
+  version: "0.11.0"
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}.*
   # Python Stable ABI (SABI with nanobind requires 3.12)
   abi3_tag: cp312
@@ -18,16 +18,14 @@ recipe:
 
 source:
   url: https://github.com/jorgensd/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 7896d11a6b8bd2a16de59f0ef2b5466d5361e1b2733403faaabc1d8c176fd50a
+  sha256: a9283dc0bfcfe6567258ef9f6c7ed7f403f3ec99a916152e6467cd1fb6998693
   patches:
-    - cross-python.patch
     - 0001-nanobind-abi.patch
-    - 0002-mpc-typo.patch
 build:
   number: 0
   skip:
     - win
-    - match(python, "<3.10")
+    - match(python, "<3.11")
     - skip_abi3
 outputs:
   - package:
@@ -125,6 +123,10 @@ outputs:
             - python/tests/
         requirements:
           run:
+            - if: linux and target_platform != build_platform
+              then:
+                # __glibc virtual package seems to resolve wrong on emulated linux
+                - ${{ stdlib("c") }}
             - pip
             - pytest
             - pytest-asyncio
@@ -145,11 +147,9 @@ outputs:
             # skip stokes_channelflow, it seems to take ages
             # and sometimes get stuck
             - export PYTEST_ADDOPTS="--durations 10 -k 'not stokes_channelflow'"
-            - pytest -vs python/tests
-            - mpiexec -n 2 pytest -vs python/tests
+            - $PYTHON -m pytest -vs python/tests
+            - mpiexec -n 2 $PYTHON -m pytest -vs python/tests
           env:
-            # workaround https://github.com/prefix-dev/rattler-build/issues/1317
-            CONDA_BUILD: "1"
             # mac tests are quite slow
             MPIEXEC_TIMEOUT: "1200"
 
